@@ -11,7 +11,18 @@ export const createUser = async (req, res) => {
 };
 
 export const getUser = async (req, res) => {
-  const users = await User.find();
+  const { name, age } = req.query;
+  const filter = {};
+  if (name) {
+    filter.name = name;
+  }
+
+  if (age) {
+    filter.age = number(age);
+  }
+
+  const users = await User.find(filter);
+
   return res.json(users);
 };
 
