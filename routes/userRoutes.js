@@ -16,4 +16,8 @@ router.put("/api/users/:id", updateUser);
 
 router.delete("/api/users/:id", deleteUser);
 
+router.get("/api/test-error", (req, res) => {
+  throw new Error("error");
+});
+
 export default router;
