@@ -10,7 +10,7 @@ export const createUser = async (req, res) => {
   return res.json(newUser);
 };
 
-export const getUser = async (req, res) => {
+export const getUser = async (req, res, next) => {
   const { name, age } = req.query;
   const filter = {};
   if (name) {
@@ -18,12 +18,14 @@ export const getUser = async (req, res) => {
   }
 
   if (age) {
-    filter.age = number(age);
+    filter.age = Number(age);
   }
-
-  const users = await User.find(filter);
-
-  return res.json(users);
+  try {
+    const users = await User.find(filter);
+    return res.json(users);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const updateUser = async (req, res) => {
