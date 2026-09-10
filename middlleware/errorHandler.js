@@ -1,7 +1,13 @@
 const errorHandler = (err, req, res, next) => {
-  const status = err.status || 500;
-  res.status(status).json({
-    message: err.message,
-  });
+  if (err.name === "CastError") {
+    res.status(400).json({
+      success: false,
+      message: "Invalid ID",
+    });
+  } else {
+    res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "something went wrong",
+    });
+  }
 };
-export default errorHandler;
