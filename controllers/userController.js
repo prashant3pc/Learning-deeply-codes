@@ -1,13 +1,18 @@
 import User from "../models/User.js";
 import createError from "http-errors";
 import asyncHandler from "express-async-handler";
+import bcrypt from "bcrypt";
 
 export const createUser = asyncHandler(async (req, res) => {
-  const { name, email, age } = req.body;
+  const { name, email, age, password } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   const newUser = await User.create({
     name,
     email,
     age,
+    password: hashedPassword,
   });
 
   return res.json({
@@ -38,10 +43,10 @@ export const getUser = async (req, res, next) => {
 
 export const updateUser = asyncHandler(async (req, res) => {
   const id = req.params.id;
-  const { name, age, email } = req.body;
+  const { name, age, email, password } = req.body;
   const user = await User.findByIdAndUpdate(
     id,
-    { name, age, email },
+    { name, age, email, password },
     { new: true },
   );
 

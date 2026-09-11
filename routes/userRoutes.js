@@ -26,7 +26,7 @@ router.get("/api/test-error", (req, res) => {
   throw createError(404, "User not found");
 });
 
-router.get("/api/test-error", (req, res, next) => {
+router.get("/api/test-error1", (req, res, next) => {
   const error = new Error("User not found");
   next(error);
 });

@@ -12,19 +12,31 @@ export const createUserValidation = [
   body("age")
     .isInt({ min: 18 })
     .withMessage("Please provide age greater than 18"),
-];
 
-export const updateUserValidation = [
-  body("name")
-    .optional()
+  body("password")
     .notEmpty()
-    .withMessage("Please enter your updating name"),
+    .withMessage("Please provide a password")
+    .isLength({ min: 8 })
+    .withMessage("Please provide a password with at least 8 characters"),
+];
+export const updateUserValidation = [
+  body("name").notEmpty().withMessage("Please provide a name"),
 
-  body("email").optional().isEmail(),
+  body("email")
+    .notEmpty()
+    .withMessage("Please provide an email")
+    .isEmail()
+    .withMessage("Please provide a valid email"),
+
   body("age")
-    .optional()
     .isInt({ min: 18 })
     .withMessage("Please provide age greater than 18"),
+
+  body("password")
+    .notEmpty()
+    .withMessage("Please provide a password")
+    .isLength({ min: 8 })
+    .withMessage("Please provide a password with at least 8 characters"),
 ];
 
 export const validate = (req, res, next) => {
