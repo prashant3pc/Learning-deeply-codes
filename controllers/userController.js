@@ -84,3 +84,44 @@ export const adminController = (req, res) => {
     message: "Welcome admin",
   });
 };
+
+// OWNERSHIP
+// const note = await Note.findById(req.params.id);
+// if (req.user.id !== note.user) {
+//   res.status(403).json({
+//     success: false,
+//     messgae: "forbidden you are not allowed",
+//   });
+// }
+
+// OWNERSHIP;
+// export const updateNote = asyncHandler(async (req, res) => {
+//   const { title, content } = req.body;
+//   const note = await Note.findById(req.params.id);
+//   if (!note) {
+//    return res.status(404).json({
+//       success: false,
+//       message: "Note doesnt exist",
+//     });
+//   }
+
+//   if (req.user.id !== note.user.toString()) {
+//     return res.status(403).json({
+//       success: false,
+//       message: "forbidden you are not allowed",
+//     });
+//   }
+
+//   const updatedNote = await Note.findByIdAndUpdate(
+//     req.params.id,
+//     {
+//       title,
+//       content,
+//     },
+//     { new: true },
+//   );
+//   res.json({
+//     success: true,
+//     data: updatedNote,
+//   });
+// });
