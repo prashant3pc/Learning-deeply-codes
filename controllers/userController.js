@@ -77,3 +77,10 @@ export const deleteUser = async (req, res) => {
     message: "user deleted successfully",
   });
 };
+
+export const adminController = (req, res) => {
+  return res.json({
+    success: true,
+    message: "Welcome admin",
+  });
+};

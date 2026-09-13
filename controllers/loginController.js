@@ -24,14 +24,16 @@ export const loginUser = asyncHandler(async (req, res) => {
     });
   }
 
-  const createToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  const createToken = jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1h",
+    },
+  );
   res.json({
     success: true,
     data: createToken,
     message: "Token created",
   });
 });
-
-//   jwt.verify(createToken, process.env.JWT_SECRET);
